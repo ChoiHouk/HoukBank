@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HoukBank</string>
-
+    <string name="customer_name">최호욱님, 안녕하세요.</string>
+    <string name="check_asset">내 자산현황 ></string>
 </resources>
