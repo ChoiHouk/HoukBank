@@ -2,4 +2,6 @@
     <string name="app_name">HoukBank</string>
     <string name="customer_name">최호욱님, 안녕하세요.</string>
     <string name="check_asset">내 자산현황 ></string>
+    <string name="ofCust">최호욱의 통장 ★</string>
+    <string name="account_type">입출금</string>
 </resources>
