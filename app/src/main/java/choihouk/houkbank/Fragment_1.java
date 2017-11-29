@@ -1,6 +1,5 @@
 package choihouk.houkbank;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,18 +30,22 @@ import java.util.Map;
 public class Fragment_1 extends Fragment {
 
     String HttpUrl = "http://13.124.186.173/getUserInfo.php";
-
+    String userName;
     ViewGroup rootView;
     RequestQueue requestQueue;
-    ProgressDialog progressDialog;
+
+    TextView cust_name, ac_type, account_number;
 
     String name, account, account_type;
-    int balnace;
+    int balance;
 
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //로그인한사람 정보가져오기
+        receive_user_info();
 
     }
 
@@ -50,60 +53,21 @@ public class Fragment_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_1, container, false);
 
+        cust_name = (TextView) rootView.findViewById(R.id.cust_name);
+        ac_type = (TextView) rootView.findViewById(R.id.account_type);
+        account_number = (TextView) rootView.findViewById(R.id.account_number);
+
+
+        userName = "최호욱";
         //php서버를 통해 db로 데이터를 요청 안드로이드는 보안이슈로 디비와 직접적인 통신을 할 수 없기때문에 php를 거친다.
-        progressDialog.setMessage("로딩중.. 좀만 기둘려주떼염");
-        progressDialog.show();
 
-        requestQueue = Volley.newRequestQueue(getActivity().getApplication());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                if(!response.equals("0 results")){
-                    Toast.makeText(getActivity().getApplication(),"데이터 가져오기 성공",Toast.LENGTH_LONG).show();
-
-                    try {
-                        JSONArray arr = new JSONArray(response);
-                        for(int i =0; i<arr.length(); i++){
-                            JSONObject obj =  arr.getJSONObject(i);
-                            name=obj.getString("name");
-                            account=obj.getString("account");
-                            account_type = obj.getString("account_type");
-                            balnace = obj.getInt("balance");
-
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplication(),error.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("name", "최호욱");
-
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
 
         //가져온 데이터 셋팅
-        TextView cust_name = (TextView)rootView.findViewById(R.id.cust_name);
         cust_name.setText(name);
-        TextView ac_type = (TextView)rootView.findViewById(R.id.account_type);
         ac_type.setText(account_type);
-        TextView account_number = (TextView)rootView.findViewById(R.id.account_number);
         account_number.setText(account);
-        TextView cust_balance = (TextView)rootView.findViewById(R.id.balance);
-        cust_balance.setText(balnace);
+
 
 
 
@@ -118,6 +82,42 @@ public class Fragment_1 extends Fragment {
 
 
         return rootView;
+    }
+
+    public void receive_user_info() {
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray arr  = new JSONArray(response);
+                    for(int i =0; i<arr.length(); i++){
+                        JSONObject data =  arr.getJSONObject(i);
+                        name = data.getString("name");
+                        account = data.getString("account");
+                        balance = data.getInt("balance");
+                        account_type = data.getString("account_type");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("name", userName);
+                return parameters;
+            }
+        };
+        queue.add(stringRequest);
     }
 
 }
