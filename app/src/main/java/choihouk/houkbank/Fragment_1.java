@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +31,12 @@ import java.util.Map;
 public class Fragment_1 extends Fragment {
 
     String HttpUrl = "http://13.124.186.173/getUserInfo.php";
-    String userName;
     ViewGroup rootView;
-    RequestQueue requestQueue;
 
-    TextView cust_name, ac_type, account_number;
+    TextView cust_name, ac_type, account_number,cust_balance, welcome = null;
+    ImageView profile;
 
-    String name, account, account_type;
+    String name, account, account_type, userName;
     int balance;
 
     @Nullable
@@ -44,8 +44,9 @@ public class Fragment_1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //로그인한사람 정보가져오기
+        userName = "최호욱";
         receive_user_info();
+
 
     }
 
@@ -53,22 +54,13 @@ public class Fragment_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_1, container, false);
 
+
+        welcome = (TextView) rootView.findViewById(R.id.welcome);
         cust_name = (TextView) rootView.findViewById(R.id.cust_name);
         ac_type = (TextView) rootView.findViewById(R.id.account_type);
         account_number = (TextView) rootView.findViewById(R.id.account_number);
-
-
-        userName = "최호욱";
-        //php서버를 통해 db로 데이터를 요청 안드로이드는 보안이슈로 디비와 직접적인 통신을 할 수 없기때문에 php를 거친다.
-
-
-
-        //가져온 데이터 셋팅
-        cust_name.setText(name);
-        ac_type.setText(account_type);
-        account_number.setText(account);
-
-
+        cust_balance = (TextView) rootView.findViewById(R.id.balance);
+        profile = (ImageView) rootView.findViewById(R.id.profile);
 
 
         //외부 포털 사이트 이동 기능
@@ -89,19 +81,32 @@ public class Fragment_1 extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONArray arr  = new JSONArray(response);
-                    for(int i =0; i<arr.length(); i++){
-                        JSONObject data =  arr.getJSONObject(i);
-                        name = data.getString("name");
-                        account = data.getString("account");
-                        balance = data.getInt("balance");
-                        account_type = data.getString("account_type");
+                    try {
+                        JSONArray arr = new JSONArray(response);
+                        for (int i = 0; i < arr.length(); i++) {
+                            JSONObject data = arr.getJSONObject(i);
+                            name = data.getString("Name");
+                            account = data.getString("Account");
+                            balance = data.getInt("Balance");
+                            account_type = data.getString("account_type");
+                        }
+
+                        String switch_balance = String.valueOf(balance);
+
+                        //가져온 데이터 셋팅
+                        cust_name.setText(name+getResources().getString(R.string.ofCust));
+                        ac_type.setText(account_type);
+                        account_number.setText(account);
+                        cust_balance.setText(switch_balance+getResources().getString(R.string.one));
+                        welcome.setText(name+getResources().getString(R.string.welcome_cust));
+
+                        profile.setImageResource(R.drawable.houk);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         }, new Response.ErrorListener() {
             @Override
