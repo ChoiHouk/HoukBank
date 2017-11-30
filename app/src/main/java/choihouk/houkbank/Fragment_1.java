@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,13 @@ public class Fragment_1 extends Fragment {
 
 
     }
+    @Override
+    public void onResume() {
+          super.onResume();
+         receive_user_info();
+       }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,7 +68,7 @@ public class Fragment_1 extends Fragment {
         cust_name = (TextView) rootView.findViewById(R.id.cust_name);
         ac_type = (TextView) rootView.findViewById(R.id.account_type);
         account_number = (TextView) rootView.findViewById(R.id.account_number);
-        cust_balance = (TextView) rootView.findViewById(R.id.balance);
+        cust_balance = (TextView) rootView.findViewById(R.id.cust_balance);
         profile = (ImageView) rootView.findViewById(R.id.profile);
 
 
@@ -80,6 +88,26 @@ public class Fragment_1 extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), transfer.class));
+
+            }
+        });
+
+        //입금버튼 클릭시 이벤트
+        Button deposit = (Button) rootView.findViewById(R.id.deposit);
+        deposit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), deposit.class));
+
+            }
+        });
+
+        //통장 클릭시 이벤트
+        ConstraintLayout cust_card = (ConstraintLayout) rootView.findViewById(R.id.cust_card);
+        cust_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), check_account.class));
 
             }
         });

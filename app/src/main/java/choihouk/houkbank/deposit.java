@@ -25,69 +25,66 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class transfer extends AppCompatActivity {
+public class deposit extends AppCompatActivity {
 
-    String HttpUrl2 = "http://13.124.186.173/transfer.php";
+    String HttpUrl2 = "http://13.124.186.173/deposit.php";
     String HttpUrl = "http://13.124.186.173/getUserInfo.php";
 
-    String name, account, account_type, userName, receive_user, transfer_amount;
+    String name, account, account_type, userName, deposit_amount;
     TextView cust_info;
-    EditText transfer;
+    EditText deposit;
+
     int balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transfer);
+        setContentView(R.layout.activity_deposit);
 
         cust_info = (TextView) findViewById(R.id.cust_info);
-        transfer = (EditText) findViewById(R.id.transfer_amount);
+        deposit = (EditText) findViewById(R.id.deposit_amount);
 
         userName = "최호욱";
-        receive_user = "박승철";
         receive_user_info();
-
-
 
         //취소 클릭시 메인으로 돌아가기
         Button cancle = (Button) findViewById(R.id.cancle);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(transfer.this, MainActivity.class);
+                Intent i = new Intent(deposit.this, MainActivity.class);
                 i.addFlags(i.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
             }
         });
 
-        //확인 클릭시 송금
+        //확인 클릭시 입금
         Button confirm = (Button) findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transfer_amount = transfer.getText().toString();
-                transfer();
-                Intent i = new Intent(transfer.this, MainActivity.class);
+                deposit_amount = deposit.getText().toString();
+                deposit();
+                Intent i = new Intent(deposit.this, MainActivity.class);
                 i.addFlags(i.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
             }
         });
-
 
 
 
     }
 
-    //송금 메서드
-    public void transfer() {
+    //입금 메서드
+    public void deposit() {
         RequestQueue request = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl2, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(getApplicationContext(), "송금이 성공적으로 완료되었습니다!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "입금이 성공적으로 완료되었습니다!", Toast.LENGTH_LONG).show();
 
 
             }
@@ -101,9 +98,8 @@ public class transfer extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("trans_name", userName);
-                parameters.put("receive_name", receive_user);
-                parameters.put("balance", transfer_amount);
+                parameters.put("name", userName);
+                parameters.put("balance", deposit_amount);
                 return parameters;
             }
         };
@@ -155,5 +151,4 @@ public class transfer extends AppCompatActivity {
         };
         queue.add(stringRequest);
     }
-
 }

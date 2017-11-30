@@ -8,4 +8,6 @@
     <string name="cancle">취소</string>
     <string name="transfer_hint">보낼 금액</string>
     <string name="confirm">확인</string>
+    <string name="deposit">입금하기</string>
+    <string name="deposit_hint">입금 금액</string>
 </resources>

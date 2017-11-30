@@ -24,6 +24,14 @@
         <activity android:name=".transfer">
 
         </activity>
+
+        <activity android:name=".deposit">
+
+        </activity>
+
+        <activity android:name=".check_account">
+
+        </activity>
     </application>
 
 </manifest>
