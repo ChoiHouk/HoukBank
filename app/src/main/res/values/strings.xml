@@ -4,4 +4,8 @@
     <string name="check_asset">내 자산현황 ></string>
     <string name="ofCust">의 통장 ★</string>
     <string name="one">원</string>
+    <string name="transfer">이체하기</string>
+    <string name="cancle">취소</string>
+    <string name="transfer_hint">보낼 금액</string>
+    <string name="confirm">확인</string>
 </resources>

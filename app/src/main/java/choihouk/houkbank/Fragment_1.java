@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,12 +64,23 @@ public class Fragment_1 extends Fragment {
         profile = (ImageView) rootView.findViewById(R.id.profile);
 
 
+
         //외부 포털 사이트 이동 기능
         ImageButton adButton = (ImageButton) rootView.findViewById(R.id.ad_btn);
         adButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://kmong.com/")));
+            }
+        });
+
+        //이체버튼 클릭시 이벤트
+        Button transfer = (Button) rootView.findViewById(R.id.transfer);
+        transfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), transfer.class));
+
             }
         });
 
