@@ -7,7 +7,14 @@
     <string name="transfer">이체하기</string>
     <string name="cancle">취소</string>
     <string name="transfer_hint">보낼 금액</string>
+    <string name="transfer_name">받는 사람</string>
     <string name="confirm">확인</string>
     <string name="deposit">입금하기</string>
     <string name="deposit_hint">입금 금액</string>
+    <string name="name">이름</string>
+    <string name="type">구분</string>
+    <string name="amount">금액</string>
+    <string name="date">날짜</string>
+    <string name="input_user">사용자 이름을 입력해주세요.</string>
+    <string name="login">Login</string>
 </resources>

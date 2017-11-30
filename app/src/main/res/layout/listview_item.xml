@@ -8,29 +8,38 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:text="New Text" />
+        android:text="New Text"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:text="New Text" />
+        android:text="New Text"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
-        android:text="New Text" />
+        android:text="New Text"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:text="New Text" />
+        android:padding="5dp"
+        android:text="New Text"
+        android:textSize="16sp" />
 
 </LinearLayout>

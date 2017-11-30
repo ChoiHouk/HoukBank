@@ -44,7 +44,7 @@ public class deposit extends AppCompatActivity {
         cust_info = (TextView) findViewById(R.id.cust_info);
         deposit = (EditText) findViewById(R.id.deposit_amount);
 
-        userName = "최호욱";
+        userName = SharedPref.getInstance(getApplicationContext()).getUsername();
         receive_user_info();
 
         //취소 클릭시 메인으로 돌아가기

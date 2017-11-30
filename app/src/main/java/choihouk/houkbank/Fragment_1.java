@@ -35,8 +35,9 @@ public class Fragment_1 extends Fragment {
     String HttpUrl = "http://13.124.186.173/getUserInfo.php";
     ViewGroup rootView;
 
-    TextView cust_name, ac_type, account_number,cust_balance, welcome = null;
+    TextView cust_name, ac_type, account_number,cust_balance, welcome, test = null;
     ImageView profile;
+
 
     String name, account, account_type, userName;
     int balance;
@@ -46,9 +47,8 @@ public class Fragment_1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        userName = "최호욱";
+        userName = SharedPref.getInstance(getActivity().getApplicationContext()).getUsername();
         receive_user_info();
-
 
     }
     @Override
@@ -62,6 +62,10 @@ public class Fragment_1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = (ViewGroup) inflater.inflate(R.layout.fragment_1, container, false);
+
+
+
+
 
 
         welcome = (TextView) rootView.findViewById(R.id.welcome);
@@ -78,7 +82,7 @@ public class Fragment_1 extends Fragment {
         adButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://kmong.com/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/ChoiHouk/")));
             }
         });
 

@@ -5,6 +5,7 @@
     android:id="@+id/ScrollView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -155,6 +156,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/add_btn"
                 tools:ignore="ContentDescription" />
+
         </android.support.constraint.ConstraintLayout>
 
         <Button
@@ -168,7 +170,6 @@
             android:id="@+id/ad_btn"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@android:color/transparent"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ad"
             tools:ignore="ContentDescription" />

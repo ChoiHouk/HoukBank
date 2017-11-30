@@ -32,7 +32,7 @@ public class transfer extends AppCompatActivity {
 
     String name, account, account_type, userName, receive_user, transfer_amount;
     TextView cust_info;
-    EditText transfer;
+    EditText transfer, receive_name;
     int balance;
 
     @Override
@@ -42,9 +42,10 @@ public class transfer extends AppCompatActivity {
 
         cust_info = (TextView) findViewById(R.id.cust_info);
         transfer = (EditText) findViewById(R.id.transfer_amount);
+        receive_name = (EditText) findViewById(R.id.transfer_name);
 
-        userName = "최호욱";
-        receive_user = "박승철";
+        userName = SharedPref.getInstance(getApplicationContext()).getUsername();
+        receive_user = receive_name.getText().toString();
         receive_user_info();
 
 

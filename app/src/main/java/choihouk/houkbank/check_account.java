@@ -1,7 +1,10 @@
 package choihouk.houkbank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +52,20 @@ public class check_account extends AppCompatActivity {
         account_number = (TextView) findViewById(R.id.account_number);
         cust_balance = (TextView) findViewById(R.id.cust_balance);
 
-        userName = "최호욱";
+        userName = SharedPref.getInstance(getApplicationContext()).getUsername();
         receive_user_info();
+
+        //취소 클릭시 메인으로 돌아가기
+        Button cancle = (Button) findViewById(R.id.cancle);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(check_account.this, MainActivity.class);
+                i.addFlags(i.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }
+        });
 
 
 
@@ -109,7 +124,7 @@ public class check_account extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, HttpUrl2, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "통신은성공했구나", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "거래내역 조회 성공!", Toast.LENGTH_LONG).show();
                 try {
                     JSONArray arr = new JSONArray(response);
                     for (int i = 0; i < arr.length(); i++) {
