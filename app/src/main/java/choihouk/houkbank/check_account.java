@@ -67,9 +67,6 @@ public class check_account extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     //데이터 가져오기 메서드
@@ -138,9 +135,6 @@ public class check_account extends AppCompatActivity {
                     }
 
                     listview.setAdapter(adapter);
-
-
-
 
 
                 } catch (JSONException e) {
